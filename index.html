@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Common Ground, Greater Goals</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        color: #004d60;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        font-size: 1.5em;
+        margin-top: 30px;
+      }
+
+      #countdown {
+        display: flex;
+        gap: 20px;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .time-box {
+        background: rgba(255, 255, 255, 0.6);
+        padding: 15px 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .label {
+        display: block;
+        font-size: 0.5em;
+        font-weight: normal;
+      }
+
+      #quote {
+        margin-top: 40px;
+        font-style: italic;
+        font-size: 1.1em;
+        max-width: 600px;
+      }
+
+      @media (max-width: 600px) {
+        #countdown {
+          flex-direction: column;
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Exams are approaching! This is the time to lock in.</h1>
+
+    <div id="countdown">
+      <div class="time-box">
+        <span id="days">0</span><span class="label">Days</span>
+      </div>
+      <div class="time-box">
+        <span id="hours">0</span><span class="label">Hours</span>
+      </div>
+      <div class="time-box">
+        <span id="minutes">0</span><span class="label">Minutes</span>
+      </div>
+      <div class="time-box">
+        <span id="seconds">0</span><span class="label">Seconds</span>
+      </div>
+    </div>
+
+    <h2>Excellence is not an option, it's a responsibility.</h2>
+    <h2>Pythagoras for NACES president!</h2>
+
+    <div id="quote"></div>
+
+    <script>
+      const targetDate = new Date("2025-09-08T00:00:00").getTime();
+
+      const quotes = [
+        "Education is the most powerful weapon which you can use to change the world. – Nelson Mandela",
+        "The roots of education are bitter, but the fruit is sweet. – Aristotle",
+        "An investment in knowledge pays the best interest. – Benjamin Franklin",
+        "The beautiful thing about learning is that no one can take it away from you. – B.B. King",
+        "Success is the sum of small efforts, repeated day in and day out. – Robert Collier",
+        "Learning never exhausts the mind. – Leonardo da Vinci",
+        "It is not that I'm so smart. But I stay with the questions much longer. – Albert Einstein",
+        "The expert in anything was once a beginner. – Helen Hayes",
+        "Study hard, for the well is deep, and our brains are shallow. – Richard Baxter",
+        "Today a reader, tomorrow a leader. – Margaret Fuller",
+      ];
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById("countdown").innerHTML = "It's time!";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+
+        // Show academic quote of the day
+        const quoteIndex = days % quotes.length;
+        document.getElementById("quote").textContent = quotes[quoteIndex];
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown(); // Initial call
+    </script>
+  </body>
+</html>
